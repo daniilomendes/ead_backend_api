@@ -12,7 +12,7 @@ export const adminjs = new AdminJs({
     resources: adminJsResources,
     branding: {
         companyName: 'OneBitFlix',
-        logo: './logoOnebitflix.svg',
+        logo: '/logoOnebitflix.svg',
         theme: {
             colors: {
                 primary100: '#ff0043',
