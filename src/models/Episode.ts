@@ -11,11 +11,9 @@ export interface Episode {
   courseId: number
 }
 
-export interface EpisodeCreationAttributes
-  extends Optional<Episode, 'id' | 'videoUrl' | 'secondsLong' > {}
+export interface EpisodeCreationAttributes extends Optional<Episode, 'id' | 'videoUrl' | 'secondsLong' > {}
 
-export interface EpisodeInstance
-  extends Model<Episode, EpisodeCreationAttributes>, Episode {}
+export interface EpisodeInstance extends Model<Episode, EpisodeCreationAttributes>, Episode {}
 
 export const Episode = sequelize.define<EpisodeInstance, Episode>('Episode', {
   id: {
