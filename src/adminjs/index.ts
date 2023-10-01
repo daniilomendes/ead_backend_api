@@ -3,7 +3,7 @@ import AdminJsExpress from '@adminjs/express'
 import AdminJsSequelize from '@adminjs/sequelize'
 import { sequelize } from '../database'
 import { adminJsResources } from './resources'
-import { User } from '../models'
+import { Category, Course, Episode, User } from '../models'
 import bcrypt from 'bcrypt'
 import { locale } from './locale'
 
@@ -34,16 +34,32 @@ export const adminjs = new AdminJs({
             }
         }
     },
-    locale: locale
+    locale: locale,
+    dashboard: {
+        component: AdminJs.bundle("./components/Dashboard"),
+        handler: async (req, res, context) => {
+            const courses = await Course.count()
+            const episodes = await Episode.count()
+            const categories = await Category.count()
+            const standardUsers = await User.count({ where: { role: 'user ' } })
+
+            res.json({
+                'Cursos': courses,
+                'Episódios': episodes,
+                'Categorias': categories,
+                'Usuários': standardUsers
+            })
+        }
+    }
 })
 
 export const adminJsRouter = AdminJsExpress.buildAuthenticatedRouter(adminjs, {
     authenticate: async (email, password) => {
         const user = await User.findOne({ where: { email } })
 
-        if(user && user.role === 'admin'){
+        if (user && user.role === 'admin') {
             const matched = await bcrypt.compare(password, user.password)
-            if(matched){
+            if (matched) {
                 return user
             }
         }
