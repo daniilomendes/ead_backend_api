@@ -7,7 +7,7 @@ import { User } from './User'
 Category.hasMany(Course, { as: 'courses' })
 
 Course.belongsTo(Category)
-Course.hasMany(Episode) // Episodes
+Course.hasMany(Episode, { as: 'episodes'}) // Episodes
 
 Episode.belongsTo(Course)
 
