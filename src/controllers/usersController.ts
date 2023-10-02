@@ -15,6 +15,28 @@ export const usersController = {
         }
     },
 
+    // PUT /users/current
+    update: async (req: AuthenticatedRequest, res: Response) => {
+        const { id } = req.user!
+        const { firstName, lastName, phone, email, birth } = req.body
+
+        try {
+            const updatedUser = await userService.update(id, {
+                firstName,
+                lastName,
+                phone,
+                email,
+                birth
+            })
+
+            return res.json(updatedUser)
+        } catch (error) {
+            if (error instanceof Error) {
+                return res.status(400).json({ message: error.message })
+            }
+        }
+    },
+
     // GET /users/current/watching
     watching: async (req: AuthenticatedRequest, res: Response) => {
         const { id } = req.user!
