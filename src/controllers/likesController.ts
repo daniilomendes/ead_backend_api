@@ -16,5 +16,20 @@ export const likesController = {
                 return res.status(400).json({ message: error.message })
             }
         }
+    },
+
+    // DELETE /likes/:id
+    delete: async (req: AuthenticatedRequest, res: Response) => {
+        const userId = req.user!.id
+        const courseId = req.params.id
+
+        try {
+            await likeService.delete(userId, Number(courseId))
+            return res.status(204).send()
+        } catch (error) {
+            if (error instanceof Error) {
+                return res.status(400).json({ message: error.message })
+            }
+        }
     }
 }
