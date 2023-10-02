@@ -30,6 +30,18 @@ export const coursesController = {
         }
     },
 
+    // GET /courses/popular
+    popular: async (req: Request, res: Response) => {
+        try {
+            const topTen = await courseService.getTopTenByLikes()
+            return res.json(topTen)
+        } catch (error) {
+            if (error instanceof Error) {
+                return res.status(400).json({ message: error.message })
+            }
+        }
+    },
+
     // GET /courses/search?name=
     search: async (req: Request, res: Response) => {
         const { name } = req.query
