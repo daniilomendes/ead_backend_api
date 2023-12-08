@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node-modules src/server.ts",
     "build": "tsc",
-    "start": "node ./dist/server.ts"
+    "start": "node ./dist/server.js"
   },
   "author": "",
   "license": "ISC",
