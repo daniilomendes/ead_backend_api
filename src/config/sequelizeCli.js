@@ -1,13 +1,10 @@
+require("dotenv").config()
+
 module.exports = {
     development: {
-        dialect: "postgres",
-        host: "127.0.0.1",
-        username: "postgres",
-        password: "123456",
-        port: "5432",
-        database: "ead_development",
-        define: {
-            timestamps: true,
-        },
+        url: process.env.DATABASE_URL
+    },
+    production: {
+        url: process.env.DATABASE_URL
     }
 }
